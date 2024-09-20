@@ -4,7 +4,8 @@
   "description": "utility package",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npx tsc",
+    "exportType": "npx tsc",
+    "build": "rm -rf dist && rm -rf types && pnpm exportType && node ./scripts/build.mjs",
     "dev": "ts-node src/index.ts"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.12.7",
+    "esbuild": "^0.23.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
