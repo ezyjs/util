@@ -1,2 +1,3 @@
 import { RandomUtil } from './RandomUtil';
-export { RandomUtil };
+import { FileUtil } from './FileUtil';
+export { RandomUtil, FileUtil };

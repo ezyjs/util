@@ -1,3 +1,7 @@
+/**
+ * RandomUtil
+ * @desc Generates random value
+ */
 export declare class RandomUtil {
     constructor();
     /**

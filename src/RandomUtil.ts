@@ -1,5 +1,9 @@
 import { randomUUID } from "crypto"
 
+/**
+ * RandomUtil
+ * @desc Generates random value
+ */
 export class RandomUtil {
   constructor() { }
 
