@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'fs'
-import path from 'path'
+import path, { extname } from 'path'
 
 /**
  * FileUtil
@@ -30,15 +30,16 @@ export class FileUtil {
    * read
    * @desc
    */
-  static read(path: string) {
+  static read(filePath: string): Promise<Buffer> {
     return new Promise((resolve, reject) => {
-      const existFlag = existsSync(path)
+      const existFlag = existsSync(filePath)
 
       if (!existFlag) {
         reject('Path that does not exist.')
       }
 
-      resolve(readFileSync(path))
+      const fileData = readFileSync(filePath)
+      resolve(fileData)
     })
   }
 
@@ -46,17 +47,55 @@ export class FileUtil {
    * write
    * @desc
    */
-  static async write() { }
+  static async write(filePath: string, fileName: string, content: string | Buffer): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const ext = extname(fileName)
+
+      if (ext !== '') {
+        reject('The file extension does not exist.')
+      }
+
+      if (existsSync(path.join(filePath, fileName))) {
+        reject('The file already exists in that path.')
+      }
+
+      writeFileSync(path.join(filePath, fileName), content)
+      resolve(true)
+    })
+  }
 
   /**
    * createDirectory
    * @desc
    */
-  static async createDirectory() { }
+  static async createDirectory(targetPath: string, options: { recursive?: boolean }): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      if (existsSync(targetPath)) {
+        reject('The directory already exists in that path.')
+      }
+
+      const path = mkdirSync(targetPath, { recursive: options.recursive })
+      if (path === '') {
+        reject('directory create fail.')
+      }
+
+      resolve(true)
+    })
+  }
 
   /**
    * deleteDirectory
    * @desc
    */
-  static async deleteDirectory() { }
+  static async deleteDirectory(targetPath: string, options?: { force?: boolean, recursive?: boolean }) {
+    return new Promise((resolve, reject) => {
+      if (!existsSync(targetPath)) {
+        reject('The folder does not exist in that path.')
+      }
+
+      rmSync(targetPath, { force: options.force, recursive: options.recursive })
+
+      resolve(true)
+    })
+  }
 }
