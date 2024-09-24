@@ -40,7 +40,6 @@ export class ConvertUtil {
   /**
    * strToNum
    * @param value 
-   * @param radix 
    * @desc
    * @example
    * ConvertUtil.strToNum() // 
@@ -50,13 +49,13 @@ export class ConvertUtil {
     if (isNaN(result)) {
       throw new Error(`Invalid integer string: ${value}`)
     }
+
     return result
   }
 
   /**
    * strToDate
    * @param value 
-   * @param radix 
    * @desc
    * @example
    * ConvertUtil.strToDate() // 
@@ -66,13 +65,13 @@ export class ConvertUtil {
     if (isNaN(date.getTime())) {
       throw new Error(`Invalid date string: ${value}`)
     }
+
     return date
   }
 
   /**
    * dateToStr
    * @param value 
-   * @param radix 
    * @desc
    * @example
    * ConvertUtil.dateToStr() // 
@@ -90,7 +89,6 @@ export class ConvertUtil {
   /**
    * base64Encode
    * @param value 
-   * @param radix 
    * @desc
    * @example
    * ConvertUtil.base64Encode() // 
@@ -102,7 +100,6 @@ export class ConvertUtil {
   /**
    * base64Decode
    * @param value 
-   * @param radix 
    * @desc
    * @example
    * ConvertUtil.base64Decode() // 
