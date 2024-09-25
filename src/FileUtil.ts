@@ -27,10 +27,21 @@ export class FileUtil {
   }
 
   /**
+   * getFileExtension
+   * @param fileName 
+   * @desc 
+   */
+  static getFileExtension(fileName: string): string {
+    return path.extname(fileName)
+  }
+
+  /**
    * read
    * @desc
    */
-  static read(filePath: string): Promise<Buffer> {
+  static read(filePath: string): Promise<Buffer>
+  static read(filePath: string, options: { encoding: BufferEncoding }): Promise<string>
+  static read(filePath: string, options?: { encoding?: BufferEncoding }): Promise<Buffer | string> {
     return new Promise((resolve, reject) => {
       const existFlag = existsSync(filePath)
 
@@ -38,7 +49,12 @@ export class FileUtil {
         reject('Path that does not exist.')
       }
 
-      const fileData = readFileSync(filePath)
+      let fileData: string | Buffer = readFileSync(filePath)
+
+      if (options?.encoding) {
+        fileData = fileData.toString(options.encoding)
+      }
+
       resolve(fileData)
     })
   }

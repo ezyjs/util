@@ -14,11 +14,7 @@ export class ConvertUtil {
    * ConvertUtil.numToBool(1) // true
    */
   public static numToBool(originValue: number): boolean {
-    if (originValue === 0) {
-      return false
-    } else {
-      return true
-    }
+    return originValue !== 0
   }
 
   /**

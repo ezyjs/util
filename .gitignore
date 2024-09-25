@@ -1,3 +1,4 @@
 node_modules
 dist
 script
+.DS_Store
