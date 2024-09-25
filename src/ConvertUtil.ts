@@ -1,3 +1,5 @@
+import { DateFormat } from "./interface"
+
 export class ConvertUtil {
   private static readonly POSITIVE_VALUES = ['y', 'yes', 'o', 'ok', 'on', 't', 'true', '1']
 
@@ -40,14 +42,15 @@ export class ConvertUtil {
   /**
    * strToNum
    * @param value 
-   * @desc
+   * @desc String to Number (NaN → 0)
    * @example
-   * ConvertUtil.strToNum() // 
-   */
+   * ConvertUtil.strToNum('1') // 1
+   * ConvertUtil.strToNum('가나다') // 0
+  */
   public static strToNum(value: string, radix: number = 10): number {
     const result = parseInt(value, radix)
     if (isNaN(result)) {
-      throw new Error(`Invalid integer string: ${value}`)
+      return 0
     }
 
     return result
@@ -74,9 +77,10 @@ export class ConvertUtil {
    * @param value 
    * @desc
    * @example
-   * ConvertUtil.dateToStr() // 
+   * ConvertUtil.dateToStr(new Date()) // 2024-09-25
+   * ConvertUtil.dateToStr(new Date(), 'YYYY') // 2024
    */
-  public static dateToStr(value: Date, format: string = 'YYYY-MM-DD'): string {
+  public static dateToStr(value: Date, format: DateFormat = 'YYYY-MM-DD'): string {
     const year = value.getFullYear()
     const month = (value.getMonth() + 1).toString().padStart(2, '0')
     const day = value.getDate().toString().padStart(2, '0')
@@ -91,7 +95,7 @@ export class ConvertUtil {
    * @param value 
    * @desc
    * @example
-   * ConvertUtil.base64Encode() // 
+   * ConvertUtil.base64Encode('Test Value') // VGVzdCBWYWx1ZQ==
    */
   public static base64Encode(value: string): string {
     return Buffer.from(value).toString('base64')
@@ -102,7 +106,7 @@ export class ConvertUtil {
    * @param value 
    * @desc
    * @example
-   * ConvertUtil.base64Decode() // 
+   * ConvertUtil.base64Decode('VGVzdCBWYWx1ZQ==') // 'Test Value'
    */
   public static base64Decode(value: string): string {
     return Buffer.from(value, 'base64').toString('utf-8')
