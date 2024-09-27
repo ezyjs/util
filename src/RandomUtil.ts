@@ -5,8 +5,6 @@ import { randomUUID } from "crypto"
  * @desc Generates random value
  */
 export class RandomUtil {
-  constructor() { }
-
   /**
    * getUUID
    * @desc Generates a UUID-based random number, which is 32 characters by default.

@@ -6,8 +6,6 @@ import path, { extname } from 'path'
  * @desc File management
  */
 export class FileUtil {
-  constructor() { }
-
   /**
    * getLocalPath
    * @desc

@@ -1,4 +1,7 @@
 import { FileUtil } from './FileUtil'
+import { ErrorUtil } from './ErrorUtil'
+import { ConstantValue } from './constant'
+
 import yaml from 'js-yaml'
 
 import type { Config } from './interface'
@@ -22,19 +25,26 @@ export class ConfigUtil {
    */
   public async loadConfig(filePath: string): Promise<void> {
     try {
-      const fileContent = await FileUtil.read(filePath, { encoding: 'utf-8' })
+      const fileContent = await FileUtil.read(filePath, { encoding: ConstantValue.ENCODING_TYPE.UTF_8 })
       const fileExtension = FileUtil.getFileExtension(filePath).toLowerCase()
 
-      if (fileExtension === '.json') {
-        this.config = JSON.parse(fileContent)
-      } else if (fileExtension === '.yaml' || fileExtension === '.yml') {
-        this.config = yaml.load(fileContent) as Config
-      } else {
-        throw new Error('Unsupported file format. Use .json, .yaml, or .yml')
+      switch (fileExtension) {
+        case ConstantValue.FILE_EXTENSION.JSON: {
+          this.config = JSON.parse(fileContent)
+          break
+        }
+        case ConstantValue.FILE_EXTENSION.YAML:
+        case ConstantValue.FILE_EXTENSION.YML: {
+          this.config = yaml.load(fileContent) as Config
+          break
+        }
+        default: {
+          throw ErrorUtil.createError('UNSUPPORTED', 'Unsupported file format. Use .json, .yaml, or .yml')
+        }
       }
 
     } catch (error) {
-      console.error(`Error loading config file: ${error}`)
+      throw ErrorUtil.NotFoundError(`Error loading config file: ${error}`)
     }
   }
 
@@ -78,10 +88,26 @@ export class ConfigUtil {
       const fileExtension = FileUtil.getFileExtension(filePath).toLowerCase()
       let configString: string
 
+      switch (fileExtension) {
+        case ConstantValue.FILE_EXTENSION.JSON: {
+          configString = JSON.stringify(this.config, null, 2)
+          break
+        }
+
+        case ConstantValue.FILE_EXTENSION.YAML:
+        case ConstantValue.FILE_EXTENSION.YML: {
+          configString = yaml.dump(this.config)
+          break
+        }
+
+        default: {
+          break
+        }
+      }
+
       if (fileExtension === '.json') {
         configString = JSON.stringify(this.config, null, 2)
       } else if (fileExtension === '.yaml' || fileExtension === '.yml') {
-        configString = yaml.dump(this.config)
       } else {
         throw new Error('Unsupported file format. Use .json, .yaml, or .yml')
       }

@@ -1,10 +1,7 @@
-import { DateFormat } from "./interface"
+import { ConstantValue } from "./constant"
+import type { DateFormat } from "./interface"
 
 export class ConvertUtil {
-  private static readonly POSITIVE_VALUES = ['y', 'yes', 'o', 'ok', 'on', 't', 'true', '1']
-
-  constructor() { }
-
   /**
    * numToBool
    * @param originValue 0, 1, 2, 3, 4, 5 ...
@@ -28,7 +25,7 @@ export class ConvertUtil {
    * ConvertUtil.strToBool('T') // true
    */
   public static strToBool(originValue: string): boolean {
-    if (this.POSITIVE_VALUES.includes(originValue.toLocaleLowerCase())) {
+    if (ConstantValue.POSITIVE_VALUES.includes(originValue.toLocaleLowerCase())) {
       return true
     } else {
       return false

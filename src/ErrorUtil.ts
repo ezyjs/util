@@ -1,3 +1,5 @@
+import { ConstantValue } from "./constant"
+
 export class CustomError extends Error {
   constructor(
     public readonly code: string,
@@ -12,17 +14,6 @@ export class CustomError extends Error {
 }
 
 export class ErrorUtil {
-  private static errorDefinitions: { [key: string]: { message: string, statusCode: number } } = {
-    VALIDATION_ERROR: { message: 'Validation Error', statusCode: 400 },
-    NOT_FOUND: { message: 'Not Found', statusCode: 404 },
-    UNAUTHORIZED: { message: 'Unauthorized', statusCode: 401 },
-    FORBIDDEN: { message: 'Forbidden', statusCode: 403 },
-    INTERNAL_SERVER_ERROR: { message: 'Internal Server Error', statusCode: 500 },
-    BAD_REQUEST: { message: 'Bad Request', statusCode: 400 },
-    CONFLICT: { message: 'Conflict', statusCode: 409 },
-    // Add more predefined errors as needed
-  }
-
   /**
    * 새로운 CustomError를 생성합니다.
    * @param code 에러 코드
@@ -30,7 +21,7 @@ export class ErrorUtil {
    * @param details 추가 세부 정보 (optional)
    */
   static createError(code: string, message?: string, details?: any): CustomError {
-    const errorDef = this.errorDefinitions[code]
+    const errorDef = ConstantValue.ERROR_DEFINITIONS[code]
     if (!errorDef) {
       throw new Error(`Undefined error code: ${code}`)
     }
@@ -125,7 +116,7 @@ export class ErrorUtil {
     let statusCode = 500
 
     if (error instanceof CustomError) {
-      statusCode = this.errorDefinitions[error.code]?.statusCode || 500
+      statusCode = ConstantValue.ERROR_DEFINITIONS[error.code]?.statusCode || 500
     }
 
     return { response: formattedError, statusCode }
@@ -136,6 +127,6 @@ export class ErrorUtil {
    * @param code 에러 코드
    */
   static getHttpStatus(code: string): number {
-    return this.errorDefinitions[code]?.statusCode || 500
+    return ConstantValue.ERROR_DEFINITIONS[code]?.statusCode || 500
   }
 }
