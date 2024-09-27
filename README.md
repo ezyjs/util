@@ -1,44 +1,52 @@
+# @ezy/util
 
-# util
+> Many convenient utility function packages that are `ezy` to use
 
-> Write your project description here
-
-- point1
-- point2
-- point3
+- Asynchronous
+-
 
 ## Installation
 
 ```bash
 # npm
-npm install util
+npm install @ezy/util
 
 # yarn
-yarn add util
+yarn add @ezy/util
 
 # pnpm
-pnpm install util
+pnpm install @ezy/util
 ```
 
 ## Usage
 
-```bash
-# Write your project usage here
+```js
+import { Converutil } from "@ezy/util";
+
+console.log(ConvertUtil.strToNum("1")); // 1
 ```
-
-## Document
-
-- Write your document link and preview here
 
 ## Authors
 
-- Write your name - Write your role (ex. Project initial and development)
+- \_jujoycode - Developer
 
 ## Version History
 
 - 0.0.1
-  - Write your version history here
+  - ✨ ConvertUtil
+    - 📝 `numToBool`
+    - 📝 `strToBool`
+    - 📝 `strToNum`
+    - 📝 `strToDate`
+    - 📝 `dateToStr`
+    - 📝 `base64Encode`
+    - 📝 `base64Decode`
+  - ✨ FileUtil
+  - ✨ RandomUtil
+  - ✨ ErrorUtil
+  - ✨ ConfigUtil
+  - ✨ ApiUtil
 
 ## License
 
-Write your license info here (ex. This project is licensed under the [MIT] License)
+This project is licensed under the [MIT] License

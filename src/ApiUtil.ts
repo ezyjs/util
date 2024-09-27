@@ -22,7 +22,6 @@ export class ApiUtil {
       timeout: 10000,
     })
 
-    this.setupInterceptors()
     this.setupErrorHandling()
   }
 
@@ -80,7 +79,7 @@ export class ApiUtil {
   * setupInterceptors
   * @desc Axios 인스턴스에 인터셉터를 설정
   */
-  private setupInterceptors(): void {
+  public setupInterceptors(): void {
     // 기존 인터셉터 제거
     this.axiosInstance.interceptors.request.clear()
     this.axiosInstance.interceptors.response.clear()
@@ -110,8 +109,6 @@ export class ApiUtil {
   public addRequestInterceptor(interceptor: RequestInterceptorModel): void {
     this.requestInterceptors.push(interceptor)
     this.requestInterceptors.sort((a, b) => b.priority - a.priority)
-
-    this.setupInterceptors()
   }
 
   /**
@@ -122,8 +119,6 @@ export class ApiUtil {
   public addResponseInterceptor(interceptor: ResponseInterceptorModel): void {
     this.responseInterceptors.push(interceptor)
     this.responseInterceptors.sort((a, b) => b.priority - a.priority)
-
-    this.setupInterceptors()
   }
 
   // Error Handling Method ----------------------------------------------------------------------

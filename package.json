@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "utility package",
   "main": "dist/index.js",
+  "homepage": "https://github.com/ezyjs/util",
   "scripts": {
     "exportType": "npx tsc",
     "build": "rm -rf dist && rm -rf types && pnpm exportType && node ./scripts/build.mjs",
