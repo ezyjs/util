@@ -8,7 +8,6 @@ import type { GetParams, PostParams, PutParams, DeleteParams, PatchParams } from
 /**
  * ApiUtil
  * @desc HTTP 요청을 처리하기 위한 유틸리티 클래스입니다.  
- * 이 클래스는 싱글톤 패턴을 사용하여 구현되었습니다.
  */
 export class ApiUtil {
   private static instance: ApiUtil | null = null
@@ -27,12 +26,13 @@ export class ApiUtil {
 
   /**
    * getInstance
-   * @desc ApiUtil의 싱글톤 인스턴스를 반환합니다.  
-   * 인스턴스가 존재하지 않는 경우 새로 생성합니다.
-   * @param baseURL API 요청의 기본 URL
+   * ApiUtil의 싱글톤 인스턴스를 반환
+   * @param baseURL - API 요청의 기본 URL
    * @returns ApiUtil의 싱글톤 인스턴스
    * @example
-   * const ApiUtil = ApiUtil.getInstance('https://api.example.com')
+   * ```typescript
+   * const apiUtil = ApiUtil.getInstance('https://api.example.com');
+   * ```
    */
   public static getInstance(baseURL: string): ApiUtil {
     if (!ApiUtil.instance) {
@@ -45,29 +45,31 @@ export class ApiUtil {
   // Config Method ----------------------------------------------------------------------
 
   /**
- * setBaseURL
- * @desc API 요청의 기본 URL을 설정
- * @param baseURL 설정할 새로운 기본 URL
- * @example
- * apiUtil.setBaseURL('https://new-api.example.com')
- */
+   * setBaseURL
+   * @desc API 요청의 기본 URL을 설정
+   * @param baseURL - 설정할 새로운 기본 URL
+   * @example
+   * ```typescript
+   * apiUtil.setBaseURL('https://new-api.example.com');
+   * ```
+   */
   public setBaseURL(baseURL: string): void {
     this.axiosInstance.defaults.baseURL = baseURL
   }
 
   /**
- * setTimeout
- * @desc API 요청의 타임아웃을 설정
- * @param timeout 설정할 타임아웃 (밀리초)
- */
+   * setTimeout
+   * @desc API 요청의 타임아웃을 설정
+   * @param timeout - 설정할 타임아웃 (밀리초)
+   */
   public setTimeout(timeout: number): void {
     this.axiosInstance.defaults.timeout = timeout
   }
 
   /**
    * setDefaultHeaders
-   * @desc API 요청의 기본 헤더를 설정
-   * @param headers 설정할 헤더 객체
+   * API 요청의 기본 헤더를 설정
+   * @param headers - 설정할 헤더 객체
    */
   public setDefaultHeaders(headers: Record<string, string>): void {
     Object.assign(this.axiosInstance.defaults.headers.common, headers)
@@ -138,7 +140,7 @@ export class ApiUtil {
 
   /**
    * handleApiError
-   * @desc API 에러를 처리합니다.
+   * @desc API 에러를 처리
    * @param error AxiosError 객체
    */
   private handleApiError(error: AxiosError): Promise<never> {
@@ -153,8 +155,13 @@ export class ApiUtil {
     switch (true) {
       // 서버가 2xx 범위를 벗어나는 상태 코드로 응답한 경우
       case !!error.response: {
-        errorCode = `API_ERROR_${error.response?.status}`
-        errorMessage = (error.response?.data as any).message || error.message
+        const status = error.response.status
+        errorCode = `API_ERROR_${status}`
+
+        const responseData = error.response.data as Record<string, unknown>
+        errorMessage = typeof responseData.message === 'string'
+          ? responseData.message
+          : error.message
         break
       }
 
@@ -182,7 +189,7 @@ export class ApiUtil {
 
   /**
    * get
-   * @desc GET 요청을 보내고 응답을 파싱합니다.
+   * @desc GET 요청을 보내고 응답을 파싱
    * @param url 요청 URL
    * @param config Axios 요청 설정 (Optional)
    */
@@ -201,7 +208,7 @@ export class ApiUtil {
 
   /**
    * post
-   * @desc POST 요청을 보내고 응답을 파싱합니다.
+   * @desc POST 요청을 보내고 응답을 파싱
    * @param url 요청 URL
    * @param data 요청 본문 데이터 (Optional)
    * @param config Axios 요청 설정 (Optional)
@@ -221,7 +228,7 @@ export class ApiUtil {
 
   /**
  * delete
- * @desc DELETE 요청을 보내고 응답을 파싱합니다.
+ * @desc DELETE 요청을 보내고 응답을 파싱
  * @param url 요청 URL
  * @param config Axios 요청 설정 (Optional)
  */
@@ -240,7 +247,7 @@ export class ApiUtil {
 
   /**
    * put
-   * @desc PUT 요청을 보내고 응답을 파싱합니다.
+   * @desc PUT 요청을 보내고 응답을 파싱
    * @param url 요청 URL
    * @param data 요청 본문 데이터 (Optional)
    * @param config Axios 요청 설정 (Optional)
@@ -260,7 +267,7 @@ export class ApiUtil {
 
   /**
    * patch
-   * @desc PATCH 요청을 보내고 응답을 파싱합니다.
+   * @desc PATCH 요청을 보내고 응답을 파싱
    * @param url 요청 URL
    * @param data 요청 본문 데이터 (Optional)
    * @param config Axios 요청 설정 (Optional)
