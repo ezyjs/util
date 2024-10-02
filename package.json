@@ -1,5 +1,5 @@
 {
-  "name": "@ez/util",
+  "name": "@ezjs/util",
   "version": "0.0.1",
   "description": "utility package",
   "main": "dist/index.js",
