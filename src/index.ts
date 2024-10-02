@@ -5,7 +5,8 @@ import { CompareUtil } from './CompareUtil'
 import { ConfigUtil } from './ConfigUtil'
 import { ValidationUtil } from './ValidationUtil'
 import { ErrorUtil } from './ErrorUtil'
+import { ApiUtil } from './ApiUtil'
 
 export {
-  RandomUtil, FileUtil, ConvertUtil, CompareUtil, ConfigUtil, ValidationUtil, ErrorUtil
+  RandomUtil, FileUtil, ConvertUtil, CompareUtil, ConfigUtil, ValidationUtil, ErrorUtil, ApiUtil
 }
