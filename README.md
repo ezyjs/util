@@ -1,6 +1,6 @@
-# @ezy/util
+# @ez/util
 
-> Many convenient utility function packages that are `ezy` to use
+> Many convenient utility function packages that are `ez` to use
 
 All our utilities are designed with asynchronous programming in mind, ensuring they work seamlessly in both synchronous and asynchronous environments. This allows for easy integration into various programming paradigms and application architectures.
 
@@ -8,19 +8,19 @@ All our utilities are designed with asynchronous programming in mind, ensuring t
 
 ```bash
 # npm
-npm install @ezy/util
+npm install @ez/util
 
 # yarn
-yarn add @ezy/util
+yarn add @ez/util
 
 # pnpm
-pnpm install @ezy/util
+pnpm install @ez/util
 ```
 
 ## Usage
 
 ```js
-import { ConvertUtil } from "@ezy/util";
+import { ConvertUtil } from "@ez/util";
 
 console.log(ConvertUtil.strToNum("1")); // 1
 ```
