@@ -7,7 +7,6 @@
     "esModuleInterop": true,
     "declaration": true,
     "emitDeclarationOnly": false,
-    "sourceMap": true,
     "strict": true,
     "moduleResolution": "node"
   },

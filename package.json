@@ -1,6 +1,6 @@
 {
   "name": "@ezjs/util",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "utility package",
   "main": "dist/index.js",
   "homepage": "https://github.com/ezyjs/util",
