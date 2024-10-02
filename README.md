@@ -1,4 +1,4 @@
-# @ez/util
+# @ezjs/util
 
 > Many convenient utility function packages that are `ez` to use
 
@@ -8,19 +8,19 @@ All our utilities are designed with asynchronous programming in mind, ensuring t
 
 ```bash
 # npm
-npm install @ez/util
+npm install @ezjs/util
 
 # yarn
-yarn add @ez/util
+yarn add @ezjs/util
 
 # pnpm
-pnpm install @ez/util
+pnpm install @ezjs/util
 ```
 
 ## Usage
 
 ```js
-import { ConvertUtil } from "@ez/util";
+import { ConvertUtil } from "@ezjs/util";
 
 console.log(ConvertUtil.strToNum("1")); // 1
 ```
