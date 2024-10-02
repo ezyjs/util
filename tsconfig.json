@@ -6,6 +6,11 @@
     "rootDir": "./src",
     "esModuleInterop": true,
     "declaration": true,
-    "emitDeclarationOnly": true
-  }
+    "emitDeclarationOnly": false,
+    "sourceMap": true,
+    "strict": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

@@ -107,7 +107,7 @@ export class FileUtil {
         reject('The folder does not exist in that path.')
       }
 
-      rmSync(targetPath, { force: options.force, recursive: options.recursive })
+      rmSync(targetPath, { force: options?.force, recursive: options?.recursive })
 
       resolve(true)
     })

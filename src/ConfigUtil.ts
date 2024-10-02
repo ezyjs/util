@@ -112,18 +112,17 @@ export class ConfigUtil {
         throw new Error('Unsupported file format. Use .json, .yaml, or .yml')
       }
 
-      FileUtil.write(filePath, configString, 'utf8')
+      FileUtil.write(filePath, configString!, 'utf8')
     } catch (error) {
       console.error(`Error saving config file: ${error}`)
     }
   }
-
   private getNestedValue(obj: Config, key: string): any {
-    return key.split('.').reduce((prev, curr) => prev && prev[curr], obj)
+    return key.split('.').reduce((prev: any, curr: string) => prev && prev[curr], obj)
   }
 
   private setNestedValue(obj: Config, key: string, value: any): void {
-    const keys = key.split('.')
+    const keys = key.split('.');
     const lastKey = keys.pop()
     const lastObj = keys.reduce((prev, curr) => {
       if (!prev[curr]) prev[curr] = {}
